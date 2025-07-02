@@ -5,7 +5,7 @@ exports.sendMessage = async (req, res) => {
     const { matchId, message } = req.body;
 
     if (!matchId || !message) {
-        return res.status(400).json({
+        return res.status(200).json({
             success: false,
             message: 'matchId and message are required'
         });
@@ -19,7 +19,7 @@ exports.sendMessage = async (req, res) => {
         );
 
         if (match.length === 0) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: 'Match not found'
             });
@@ -29,7 +29,7 @@ exports.sendMessage = async (req, res) => {
 
         // Check if blocked
         if (m.block_status !== 'none') {
-            return res.status(403).json({
+            return res.status(200).json({
                 success: false,
                 message: 'Cannot send message. User is blocked.'
             });
@@ -42,7 +42,7 @@ exports.sendMessage = async (req, res) => {
         } else if (senderId === m.user2_id) {
             receiverId = m.user1_id;
         } else {
-            return res.status(403).json({
+            return res.status(200).json({
                 success: false,
                 message: 'You are not part of this match.'
             });
@@ -80,7 +80,7 @@ exports.getMessages = async (req, res) => {
         );
 
         if (match.length === 0) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: 'Match not found'
             });
@@ -88,7 +88,7 @@ exports.getMessages = async (req, res) => {
 
         const m = match[0];
         if (userId !== m.user1_id && userId !== m.user2_id) {
-            return res.status(403).json({
+            return res.status(200).json({
                 success: false,
                 message: 'You are not part of this match.'
             });
