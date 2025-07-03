@@ -72,19 +72,19 @@ const uploadMultiple = multer({
 exports.uploadUserImages = (req, res) => {
     uploadMultiple(req, res, async function (err) {
         if (err instanceof multer.MulterError) {
-            return res.status(400).json({
+            return res.status(200).json({
                 success: false,
                 message: err.message
             });
         } else if (err) {
-            return res.status(400).json({
+            return res.status(200).json({
                 success: false,
                 message: err
             });
         }
 
         if (!req.files || req.files.length === 0) {
-            return res.status(400).json({
+            return res.status(200).json({
                 success: false,
                 message: 'No files uploaded'
             });
@@ -153,7 +153,7 @@ exports.deleteUserImage = async (req, res) => {
         );
 
         if (rows.length === 0) {
-            return res.status(404).json({
+            return res.status(200).json({
                 success: false,
                 message: 'Image not found or access denied'
             });
