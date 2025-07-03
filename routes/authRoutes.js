@@ -4,12 +4,12 @@ const authController = require('../controllers/authController');
 const authenticateToken = require('../middleware/authMiddleware');
 const uploadController = require('../controllers/uploadController');
 
-router.get('/test', (req, res) => {
+router.get('/login', (req, res) => {
     res.send('Test route working');
 });
 
 
-router.post('/login', authController.login);
+router.post('/login2', authController.login);
 router.post('/register', authController.register);
 
 // Protected routes
